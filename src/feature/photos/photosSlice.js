@@ -24,7 +24,7 @@ const photoSlice = createSlice({
       })
       .addCase(fetchPhotos.fulfilled, (state, action) => {
         state.status = "success"
-        state.albums = action.payload
+        state.photos = action.payload
       })
       .addCase(fetchPhotos.rejected, (state, action) => {
         state.status = "error"
