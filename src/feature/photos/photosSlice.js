@@ -34,7 +34,7 @@ const photoSlice = createSlice({
 });
 
 export const selectAllPhotos = state => state.photos.photos
-export const getPhotosStatus = state => state.photos.isLoading
+export const getPhotosStatus = state => state.photos.status
 export const getPhotosError = state => state.photos.error
 export const getPhotosById = (state, photoId) => state.photos.photos.find(photo => photo.id === photoId)
 export default photoSlice.reducer

@@ -5,7 +5,7 @@ const URL = "https://jsonplaceholder.typicode.com/users"
 
 const initialState = {
   users: [],
-  isloading: false,
+  status: "idle",
   error: null
 }
 
@@ -34,7 +34,7 @@ const userSlice = createSlice({
 });
 
 export const selectAllUsers = state => state.users.users
-export const getUserLoadingStatus = state => state.users.isloading
+export const getUserStatus = state => state.users.status
 export const getUserError = state => state.users.error;
 export const getUserById = (state, userId) => state.users.users.find(user => user.id === userId);
 export default userSlice.reducer
