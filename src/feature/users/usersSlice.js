@@ -19,14 +19,14 @@ const userSlice = createSlice({
   initialState,
   extraReducers: (builder) => {
     builder
-      .addCase(fetchAlbums.pending, (state) => {
+      .addCase(fetchUsers.pending, (state) => {
       state.status = "loading"
       })
-      .addCase(fetchAlbums.fulfilled, (state, action) => {
+      .addCase(fetchUsers.fulfilled, (state, action) => {
         state.status = "success"
         state.albums = action.payload
       })
-      .addCase(fetchAlbums.rejected, (state, action) => {
+      .addCase(fetchUsers.rejected, (state, action) => {
         state.status = "error"
         state.error = action.error.message
     })
