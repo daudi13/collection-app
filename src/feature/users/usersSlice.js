@@ -17,18 +17,19 @@ export const fetchUsers = createAsyncThunk("users/fetchUsers", async () => {
 const userSlice = createSlice({
   name: "users",
   initialState,
-  extraReducers: {
-    [fetchUsers.pending]: (state) => {
-      state.isloading = true
-    },
-    [fetchUsers.fulfilled]: (state, action) => {
-      state.isloading = false
-      state.users = action.payload
-    },
-    [fetchUsers.rejected]: (state, action) => {
-      state.isloading = false
-      state.error = action.error.message
-    }
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchAlbums.pending, (state) => {
+      state.status = "loading"
+      })
+      .addCase(fetchAlbums.fulfilled, (state, action) => {
+        state.status = "success"
+        state.albums = action.payload
+      })
+      .addCase(fetchAlbums.rejected, (state, action) => {
+        state.status = "error"
+        state.error = action.error.message
+    })
   }
 });
 
