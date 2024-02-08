@@ -7,6 +7,6 @@ export const store = configureStore({
   reducer: {
     users: userReducer,
     albums: albumReucer,
-    photo: photoReducer
+    photos: photoReducer
   }
 })
