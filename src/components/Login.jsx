@@ -4,6 +4,7 @@ import { Box } from '@mui/system';
 import { auth } from '../firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { CollectionState } from '../CollectionContext';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -11,6 +12,7 @@ function Login({handleClose}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { setAlert } = CollectionState();
+  const navigate = useNavigate();
 
   const handleSubmit = () => {
     signInWithEmailAndPassword(auth, email, password)
@@ -21,6 +23,7 @@ function Login({handleClose}) {
           message: `You've successfully logged in ${user.email}`,
           type: "success"
         })
+        navigate("/Homepage")
         handleClose();
       })
       .catch((error) => {
