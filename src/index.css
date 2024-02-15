@@ -9,3 +9,8 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+a {
+  color: #f3f3f3;
+  text-decoration: none;
+}
