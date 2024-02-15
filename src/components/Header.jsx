@@ -1,11 +1,15 @@
 import React from 'react'
-import { AppBar, Toolbar, Typography, Select, MenuItem, createTheme, ThemeProvider, Button } from '@mui/material'
+import { AppBar, Toolbar, Typography, createTheme, ThemeProvider, Button } from '@mui/material'
 import { Container } from '@mui/system'
 import { makeStyles } from 'tss-react/mui';
 import { CollectionState } from '../CollectionContext';
 import ModalBox from './ModalBox';
+import { Link, useNavigate } from 'react-router-dom';
+import { signOut } from 'firebase/auth';
+import { auth } from '../firebase';
 
 const Header = () => {
+  const navigate = useNavigate();
   const useStyles = makeStyles()((theme) => ({
     toolbar: {
       display: "flex",
@@ -26,10 +30,19 @@ const Header = () => {
     }
   });
 
+  const logout = () => {
+    signOut(auth);
+    navigate("/")
+    setAlert({
+      open: true,
+      message: "You've successfully logged out",
+      type: "success"
+    });
+  };
+
   const { classes } = useStyles();
-  const { setOpen, open, user } = CollectionState();
+  const { setOpen, open, isAuthenticated } = CollectionState();
   const handleOpen = () => setOpen(true);
-  console.log(user)
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -39,12 +52,9 @@ const Header = () => {
             <Typography className={classes.title}>SnapHub</Typography>
             <div className={classes.right}>
               {
-                user ?
+                isAuthenticated ?
                   (<div className={classes.menuItem}>
-                    <p>Home</p>
-                    <p>Users</p>
-                    <p>Albums</p>
-                    <p>Photo</p>
+                    <Link to={"/Homepage"}>Home</Link>
                     <Button
                 variant='contained'
                 style={{
@@ -53,7 +63,7 @@ const Header = () => {
                   marginLeft: 15,
                   backgroundColor: "#53c28b",
                 }}
-                onClick={handleOpen}
+                onClick={logout}
               >
                 Logout
                     </Button>
