@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { Navigate, useNavigate, useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import { CollectionState } from '../CollectionContext';
 import axios from 'axios';
 import { makeStyles } from 'tss-react/mui';

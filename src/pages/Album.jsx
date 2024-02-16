@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { CollectionState } from '../CollectionContext';
 import axios from 'axios';
@@ -31,11 +31,11 @@ const Album = () => {
 
   useEffect(() => {
     fetchAlbumData()
-  }, [])
+  }, []);
 
-    useEffect(() => {
+  useEffect(() => {
     fetchAlbumPhotos()
-    }, [])
+  }, []);
   
   const useStyles = makeStyles()(() => ({
     photoBox: {

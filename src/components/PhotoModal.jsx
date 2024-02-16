@@ -23,16 +23,12 @@ export default function PhotoModal({ openModal, setOpenModal, setPhoto, photoId 
 
   const editPhotoTitle = async (photoId, title) => {
     const PHOTO_URL = `https://jsonplaceholder.typicode.com/photos/${photoId}`
-    try {
-      const { data } = await axios.patch(PHOTO_URL, {
-        title: title,
-      })
-      console.log("Post title edited successfully")
-      setPhoto(data)
-      handleClose()
-    } catch (error) {
-      
-    }
+    const { data } = await axios.patch(PHOTO_URL, {
+      title: title,
+    })
+    console.log("Post title edited successfully")
+    setPhoto(data)
+    handleClose()
   }
 
   const handleSubmit = (e) => {

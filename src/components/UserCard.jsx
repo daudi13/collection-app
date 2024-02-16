@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FaUser } from "react-icons/fa";
 import axios from 'axios';
 import { CircularProgress } from '@mui/material';
@@ -20,7 +20,7 @@ const UserCard = ({ user }) => {
 
   useEffect(() => {
     fetchUserAlbums()
-  }, [])
+  },[])
 
   return (
     <div>

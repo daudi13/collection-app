@@ -1,6 +1,6 @@
 import { TextField, Button } from '@mui/material';
 import { Box } from '@mui/system';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { CollectionState } from '../CollectionContext';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../firebase';

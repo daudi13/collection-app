@@ -1,16 +1,13 @@
-import React from 'react'
 import { Container, Typography, Button } from '@mui/material';
 import Hero from "../assets/hero.png"
 import { makeStyles } from 'tss-react/mui';
-import { useNavigate } from 'react-router-dom';
 import { CollectionState } from '../CollectionContext';
 import Homepage from './Homepage';
 
 
 const LandingPage = () => {
-  const navigate = useNavigate();
   const { isAuthenticated } = CollectionState();
-  const useStyles = makeStyles()((theme) => ({
+  const useStyles = makeStyles()(() => ({
     wrapper: {
       display: "flex",
       alignItems: "center",
@@ -29,14 +26,12 @@ const LandingPage = () => {
   
   const { classes } = useStyles()
 
-  console.log(isAuthenticated)
-
   const landingContent = (
     <Container className={classes.wrapper}>
       <div className={classes.textBox}>
         <Typography className={classes.content}>
           SnapHub is an immersive online platform that seamlessly intertwines the worlds of photography, storytelling, and global connection. At its core, SnapHub is a community-driven space where individuals from around the world converge to share the stories captured through their lenses.
-          SnapHub goes beyond a typical photo-sharing platform; it's a sanctuary for visual storytellers. Users craft narratives through their albums and photos, transforming moments into captivating tales that resonate with a diverse and engaged audience
+          SnapHub goes beyond a typical photo-sharing platform; it&apos;s a sanctuary for visual storytellers. Users craft narratives through their albums and photos, transforming moments into captivating tales that resonate with a diverse and engaged audience
         </Typography>
         <Button variant="contained" style={{
           width: 215,

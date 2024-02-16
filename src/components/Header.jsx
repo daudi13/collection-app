@@ -1,4 +1,3 @@
-import React from 'react'
 import { AppBar, Toolbar, Typography, createTheme, ThemeProvider, Button } from '@mui/material'
 import { Container } from '@mui/system'
 import { makeStyles } from 'tss-react/mui';
@@ -11,7 +10,7 @@ import { auth } from '../firebase';
 const Header = () => {
   const navigate = useNavigate();
   const { setOpen, open, isAuthenticated, setAlert } = CollectionState();
-  const useStyles = makeStyles()((theme) => ({
+  const useStyles = makeStyles()(() => ({
     toolbar: {
       display: "flex",
       alignItems: "center",

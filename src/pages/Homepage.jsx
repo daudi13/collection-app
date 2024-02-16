@@ -1,19 +1,19 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Container } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 import { fetchUsers, getUserStatus, selectAllUsers } from '../feature/users/usersSlice';
 import UserCard from '../components/UserCard';
-import { useNavigate } from 'react-router-dom';
 import { CollectionState } from '../CollectionContext';
 import LandingPage from './LandingPage';
+import { useNavigate } from 'react-router-dom';
 
 
 const Homepage = () => {
   const users = useSelector(selectAllUsers);
   const status = useSelector(getUserStatus)
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const { isAuthenticated } = CollectionState();
 
@@ -22,7 +22,7 @@ const Homepage = () => {
   }, [status, dispatch]);
   
   
-    const useStyles = makeStyles()((theme) => ({
+    const useStyles = makeStyles()(() => ({
       cards: {
       display: "flex",
       flexWrap: "wrap",

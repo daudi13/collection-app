@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect} from 'react'
+import { useEffect} from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { CollectionState } from '../CollectionContext';
 import { FaUser } from "react-icons/fa";
@@ -35,7 +35,7 @@ const User = () => {
 
   useEffect(() => {
     fetchUserAlbums();
-  }, [])
+  },[])
   
   const useStyles = makeStyles()(() => ({
     wrapper: {
