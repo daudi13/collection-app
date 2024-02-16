@@ -10,15 +10,17 @@ import LandingPage from './LandingPage';
 const Photos = () => {
   const { id } = useParams();
   const PHOTO_URL = `https://jsonplaceholder.typicode.com/photos/${id}`
-  const { photo, setPhoto, isAuthenticated } = CollectionState();
+  const { photo, setPhoto, isAuthenticated, loading, setLoading } = CollectionState();
   const [openModal, setOpenModal] = useState(false)
   const navigate = useNavigate()
 
   const handleOpen = () => setOpenModal(true);
 
   const fetchPhoto = async () => {
+    setLoading(true)
     const { data } = await axios.get(PHOTO_URL)
     setPhoto(data)
+    setLoading(false)
   }
 
   useEffect(() => {
@@ -35,12 +37,12 @@ const Photos = () => {
   console.log(photo)
 
   return (
-    isAuthenticated ? <div className={classes.wrapper}>
+    isAuthenticated ? (loading ? <h1>loading photo</h1> : <div className={classes.wrapper}>
       <img src={photo?.url} className={classes.photo} />
       <p>{photo?.title}</p>
       <Button variant='contained' onClick={handleOpen}>Edit title</Button>
       <PhotoModal openModal={openModal} setOpenModal={setOpenModal} setPhoto={setPhoto} photoId={id} />
-    </div> : (navigate("/") && <LandingPage/>)
+    </div>) : (navigate("/") && <LandingPage/>)
   )
 }
 
