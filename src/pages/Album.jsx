@@ -12,18 +12,21 @@ const Album = () => {
   const ALBUM_URL = `https://jsonplaceholder.typicode.com/albums/${id}`;
   const PHOTOS_URL = `https://jsonplaceholder.typicode.com/albums/${id}/photos`;
 
-  const { album, setAlbum, setPhotoAlbum, photoAlbum, isAuthenticated } = CollectionState();
+  const { album, setAlbum, setPhotoAlbum, photoAlbum, isAuthenticated, loading, setLoading } = CollectionState();
 
 
   const fetchAlbumData = async () => {
+    setLoading(true)
     const { data } = await axios.get(ALBUM_URL)
     setAlbum(data)
+    setLoading(false)
   }
 
   const fetchAlbumPhotos = async () => {
+    setLoading(true)
     const { data } = await axios.get(PHOTOS_URL)
     setPhotoAlbum(data)
-    
+    setLoading(false)
   }
 
   useEffect(() => {
@@ -70,19 +73,19 @@ const Album = () => {
   console.log(photoAlbum);
 
   return (
-    isAuthenticated ? <div>
+    isAuthenticated ? (loading ? <h1>fetching Album info</h1> : <div>
       <p>Album details</p>
       <div>
         <p>Album Title: <span>{album?.title}</span></p>
         <p>Album Id: <span>{album?.id}</span></p>
         <p>User Id: <span>{album?.userId}</span></p>
       </div>
-        <p>Album photos</p>
+      <p>Album photos</p>
       <div className={classes.photoBox}>
         {albumPhotos}
       </div>
-    </div> : <LandingPage/>
-  )
+    </div>) : <LandingPage />
+  );
 }
 
 export default Album
