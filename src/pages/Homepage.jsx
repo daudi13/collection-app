@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Container } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
-
 import { fetchUsers, getUserStatus, selectAllUsers } from '../feature/users/usersSlice';
 import UserCard from '../components/UserCard';
 import { useNavigate } from 'react-router-dom';
@@ -56,10 +55,12 @@ const Homepage = () => {
     </div>
   ));
 
+  console.log(status)
+
   return (
     isAuthenticated ? (
       <Container className = {classes.cards}>
-      {userContent}
+      {status === "loading" ? <h1>LOading...</h1> : userContent}
       </Container>) : <LandingPage/>
   )
 }
