@@ -1,9 +1,9 @@
 import axios from 'axios';
-import React, { useEffect } from 'react'
+import React, { useEffect} from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { CollectionState } from '../CollectionContext';
 import { FaUser } from "react-icons/fa";
-import { Container } from '@mui/material';
+import { CircularProgress, Container } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 
 const User = () => {
@@ -11,18 +11,22 @@ const User = () => {
   const USER_URL = `https://jsonplaceholder.typicode.com/users/${id}`;
   const USER_ALBUM_URL = `https://jsonplaceholder.typicode.com/users/${id}/albums`;
 
-  const { selectedUser, setSelectedUser, setUserAlbums, userAlbums, isAuthenticated } = CollectionState();
+  const { selectedUser, setSelectedUser, setUserAlbums, userAlbums, isAuthenticated, loading, setLoading } = CollectionState();
 
   const navigate = useNavigate();
   
   const fetchUserAlbums = async () => {
+    setLoading(true)
     const { data } = await axios.get(USER_ALBUM_URL)
     setUserAlbums(data)
+    setLoading(false)
   }
 
   const fetchUserById = async () => {
+    setLoading(true)
     const { data } = await axios.get(USER_URL)
     setSelectedUser(data)
+    setLoading(false)
   }
 
   useEffect(() => {
@@ -85,27 +89,29 @@ const User = () => {
   if (isAuthenticated === null) navigate("/")
 
   return (
-    <Container className={classes.wrapper}>
-      <FaUser size={250} className={classes.userProfile} />
-      <div>
-        <p className={classes.label}>User Information</p>
-        <div className={classes.infoBox}>
-          <p className={classes.label}>name:<span className={classes.valueText}> {selectedUser?.name}</span></p>
-          <p className={classes.label}>username: <span className={classes.valueText}>{selectedUser?.username}</span></p>
-          <p className={classes.label}>email:<span className={classes.valueText}>
-          {selectedUser?.email}</span></p>
-          <p className={classes.label}>address: <span className={classes.valueText}>{selectedUser?.address?.street}</span></p>
-          <p className={classes.label}>Company: <span className={classes.valueText}>{selectedUser?.company?.name}</span></p>
-          <p className={classes.label}>phone:<span className={classes.valueText}>{selectedUser?.phone} </span></p>
-          <p className={classes.label}>Website: <span className={classes.valueText}>{selectedUser?.website}</span></p>
-        </div>
+    <>
+      {loading ? <CircularProgress size={300}/> : <Container className={classes.wrapper}>
+        <FaUser size={250} className={classes.userProfile} />
+        <div>
+          <p className={classes.label}>User Information</p>
+          <div className={classes.infoBox}>
+            <p className={classes.label}>name:<span className={classes.valueText}> {selectedUser?.name}</span></p>
+            <p className={classes.label}>username: <span className={classes.valueText}>{selectedUser?.username}</span></p>
+            <p className={classes.label}>email:<span className={classes.valueText}>
+              {selectedUser?.email}</span></p>
+            <p className={classes.label}>address: <span className={classes.valueText}>{selectedUser?.address?.street}</span></p>
+            <p className={classes.label}>Company: <span className={classes.valueText}>{selectedUser?.company?.name}</span></p>
+            <p className={classes.label}>phone:<span className={classes.valueText}>{selectedUser?.phone} </span></p>
+            <p className={classes.label}>Website: <span className={classes.valueText}>{selectedUser?.website}</span></p>
+          </div>
 
-        <p className={classes.label}>Albums</p>
-        <div className={classes.albumsBox}>
-          {albumContent}
+          <p className={classes.label}>Albums</p>
+          <div className={classes.albumsBox}>
+            {albumContent}
+          </div>
         </div>
-      </div>
-    </Container>
+      </Container>}
+    </>
   )
 }
 
