@@ -10,6 +10,7 @@ import { auth } from '../firebase';
 
 const Header = () => {
   const navigate = useNavigate();
+  const { setOpen, open, isAuthenticated, setAlert } = CollectionState();
   const useStyles = makeStyles()((theme) => ({
     toolbar: {
       display: "flex",
@@ -32,16 +33,15 @@ const Header = () => {
 
   const logout = () => {
     signOut(auth);
-    navigate("/")
     setAlert({
       open: true,
       message: "You've successfully logged out",
       type: "success"
     });
+    navigate("/")
   };
 
   const { classes } = useStyles();
-  const { setOpen, open, isAuthenticated } = CollectionState();
   const handleOpen = () => setOpen(true);
 
   return (
