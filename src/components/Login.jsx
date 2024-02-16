@@ -20,7 +20,7 @@ function Login({handleClose}) {
         const user = userCredential.user
         setAlert({
           open: true,
-          message: `You've successfully logged in ${user.email}`,
+          message: `You've successfully logged in with ${user.email}`,
           type: "success"
         })
         navigate("/Homepage")
